@@ -7,20 +7,36 @@
   <artifactId>feasibility-test</artifactId>
   <version>1.0-SNAPSHOT</version>
 
+  <properties>
+    <teavm.version>0.13.1</teavm.version>
+    <maven.compiler.source>11</maven.compiler.source>
+    <maven.compiler.target>11</maven.compiler.target>
+  </properties>
+
   <dependencies>
     <dependency>
       <groupId>org.teavm</groupId>
       <artifactId>teavm-classlib</artifactId>
-      <version>0.10.2</version>
+      <version>${teavm.version}</version>
       <scope>provided</scope>
     </dependency>
     <dependency>
       <groupId>org.teavm</groupId>
       <artifactId>teavm-interop</artifactId>
-      <version>0.10.2</version>
+      <version>${teavm.version}</version>
     </dependency>
 
-    
+    <!-- LSP4J -->
+    <dependency>
+      <groupId>org.eclipse.lsp4j</groupId>
+      <artifactId>org.eclipse.lsp4j</artifactId>
+      <version>0.20.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.lsp4j</groupId>
+      <artifactId>org.eclipse.lsp4j.jsonrpc</artifactId>
+      <version>0.20.1</version>
+    </dependency>
   </dependencies>
 
   <build>
@@ -28,7 +44,7 @@
       <plugin>
         <groupId>org.teavm</groupId>
         <artifactId>teavm-maven-plugin</artifactId>
-        <version>0.10.2</version>
+        <version>${teavm.version}</version>
         <executions>
           <execution>
             <goals><goal>compile</goal></goals>
@@ -36,6 +52,7 @@
               <targetType>WEBASSEMBLY</targetType>
               <mainClass>test.Main</mainClass>
               <targetDirectory>${project.build.directory}/wasm</targetDirectory>
+              <optimizationLevel>SIMPLE</optimizationLevel>
             </configuration>
           </execution>
         </executions>
